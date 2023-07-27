@@ -1,0 +1,34 @@
+--create a video game store database
+
+CREATE TABLE joycon (id INTEGER PRIMARY KEY, name TEXT, stock INTEGER, release_year INTEGER, price INTEGER);
+INSERT INTO joycon VALUES
+(1, 'The Last Of Us Remastered', 15, 2014, 18),
+(2, 'The Last Of Us Part 2', 24, 2020, 55),
+(3, 'Stray', 40, 2022, 60),
+(4, 'Teenage Mutant Ninja Turtles: The Cowabunga Collection', 19, 2022, 34),
+(5, 'Super Mario Galaxy', 5, 2007, 90),
+(6, 'Legend of Zelda: Tears of The Kingdom', 29, 2023, 90),
+(7, 'Legend of Zelda: Breath of the Wild', 20, 2017, 90),
+(8, 'Mario Kart 8 Deluxe', 28, 2014, 80),
+(9, 'Portal 2', 6, 2011, 10),
+(10, 'Minecraft', 9, 2011, 40),
+(11, 'Cuphead', 13, 2017, 60), 
+(12, 'Death Stranding', 8, 2019, 24), 
+(13, 'Borderlands 3', 4, 2019, 18),
+(14, 'Animal Crossing New Horizons', 13, 2020, 80),
+(15, 'Red Dead Redemption 2', 14, 2018, 50);
+
+--display the store database ordered by price ascending
+SELECT * FROM joycon ORDER BY price;
+
+--display the store database ordered by year ascending
+SELECT * FROM joycon ORDER BY release_year;
+
+--display the store database ordered by year in addition to price ascending
+SELECT * FROM joycon ORDER BY release_year AND price asc;
+
+--show sum of all current stock
+SELECT SUM(stock) FROM joycon;
+
+--what 5 games do we stock the most?
+SELECT name, stock FROM joycon ORDER BY stock desc LIMIT 5;
