@@ -1,4 +1,4 @@
---create a video game store database
+--Create a video game store database
 
 CREATE TABLE joycon (id INTEGER PRIMARY KEY, name TEXT, stock INTEGER, release_year INTEGER, price INTEGER);
 INSERT INTO joycon VALUES
