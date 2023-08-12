@@ -1,0 +1,132 @@
+/* Create table about movie stars and their movies */
+/* All data about actors came from IMDB and Letterboxd */
+/* Most famous movie is top letterboxd result on profile */
+
+CREATE TABLE movie_stars (
+    id INTEGER PRIMARY KEY,
+    actor_id INTEGER,
+    first_name TEXT,
+    last_name TEXT,
+    most_recent_movie TEXT,
+    most_famous_movie TEXT,
+    age INTEGER,
+    birth_place TEXT);
+    
+INSERT INTO movie_stars (actor_id, first_name, last_name, most_recent_movie, most_famous_movie, age, birth_place) VALUES ('1', 'Florence', 'Pugh', 'Oppenheimer', 'Midsommar', '27', 'England');
+INSERT INTO movie_stars (actor_id, first_name, last_name, most_recent_movie, most_famous_movie, age, birth_place) VALUES ('2', 'Pedro', 'Pascal', 'The Bubble', 'Wonder Woman 1984', '48', 'Chile');
+INSERT INTO movie_stars (actor_id, first_name, last_name, most_recent_movie, most_famous_movie, age, birth_place) VALUES ('3', 'Uma', 'Thurman', 'Hollywood Stargirl', 'Pulp Fiction', '53', 'USA');
+INSERT INTO movie_stars (actor_id, first_name, last_name, most_recent_movie, most_famous_movie, age, birth_place) VALUES ('4', 'Ethan', 'Hawke', 'Strange Way Of Life', 'Glass Onion', '53', 'USA');
+INSERT INTO movie_stars (actor_id, first_name, last_name, most_recent_movie, most_famous_movie, age, birth_place) VALUES ('5', 'Sigourney', 'Weaver', 'Avatar: The Way Of Water', 'Avatar', '73', 'USA');
+INSERT INTO movie_stars (actor_id, first_name, last_name, most_recent_movie, most_famous_movie, age, birth_place) VALUES ('6', 'Oscar', 'Isaac', 'Spider-Man: Across The Spiderverse', 'Spider-Man: Into The Spiderverse', '44', 'Guatemala');
+INSERT INTO movie_stars (actor_id, first_name, last_name, most_recent_movie, most_famous_movie, age, birth_place) VALUES ('7', 'Gillian', 'Anderson', 'White Bird', 'The Pale Blue Eye', '55', 'USA');
+INSERT INTO movie_stars (actor_id, first_name, last_name, most_recent_movie, most_famous_movie, age, birth_place) VALUES ('8', 'Keanu', 'Reeves', 'John Wick: Chapter 4', 'The Matrix', '59', 'Lebanon');
+
+CREATE TABLE most_recent_movies (
+    id INTEGER PRIMARY KEY,
+    actor_id INTEGER,
+    movie_title TEXT,
+    IMDB_rating INTEGER,
+    year_of_release INTEGER,
+    genre TEXT);
+
+INSERT INTO most_recent_movies (actor_id, movie_title, IMDB_rating, year_of_release, genre) VALUES ('1', 'Oppenheimer', '8.7', '2023', 'drama');
+INSERT INTO most_recent_movies (actor_id, movie_title, IMDB_rating, year_of_release, genre) VALUES ('2', 'The Bubble', '4.7', '2022', 'comedy');
+INSERT INTO most_recent_movies (actor_id, movie_title, IMDB_rating, year_of_release, genre) VALUES ('3', 'Hollywood Stargirl', '5.8', '2022', 'comedy');
+INSERT INTO most_recent_movies (actor_id, movie_title, IMDB_rating, year_of_release, genre) VALUES ('4', 'Strange Way of Life', '6.8', '2023', 'drama');
+INSERT INTO most_recent_movies (actor_id, movie_title, IMDB_rating, year_of_release, genre) VALUES ('5', 'Avatar: The Way Of Water', '7.6', '2022', 'action');
+INSERT INTO most_recent_movies (actor_id, movie_title, IMDB_rating, year_of_release, genre) VALUES ('6', 'Spider-Man: Across The Spiderverse', '8.9', '2023', 'animation');
+INSERT INTO most_recent_movies (actor_id, movie_title, IMDB_rating, year_of_release, genre) VALUES ('7', 'White Bird', '9.4', '2023', 'drama');
+INSERT INTO most_recent_movies (actor_id, movie_title, IMDB_rating, year_of_release, genre) VALUES ('8', 'John Wick: Chapter 4', '7.8', '2023', 'action');
+
+CREATE TABLE most_famous_movies (
+    id INTEGER PRIMARY KEY,
+    actor_id INTEGER,
+    movie_title TEXT,
+    IMDB_rating INTEGER,
+    year_of_release INTEGER,
+    genre TEXT);
+    
+INSERT INTO most_famous_movies (actor_id, movie_title, IMDB_rating, year_of_release, genre) VALUES ('1', 'Midsommar', '7.1', '2019', 'horror');
+INSERT INTO most_famous_movies (actor_id, movie_title, IMDB_rating, year_of_release, genre) VALUES ('2', 'Wonder Woman 1984', '5.4', '2020', 'action');
+INSERT INTO most_famous_movies (actor_id, movie_title, IMDB_rating, year_of_release, genre) VALUES ('3', 'Pulp Fiction', '8.9', '1994', 'drama');
+INSERT INTO most_famous_movies (actor_id, movie_title, IMDB_rating, year_of_release, genre) VALUES ('4', 'Glass Onion', '7.1', '2022', 'comedy');
+INSERT INTO most_famous_movies (actor_id, movie_title, IMDB_rating, year_of_release, genre) VALUES ('5', 'Avatar', '7.9', '2009', 'action');
+INSERT INTO most_famous_movies (actor_id, movie_title, IMDB_rating, year_of_release, genre) VALUES ('6', 'Spider-Man: Into The Spiderverse', '8.4', '2018', 'animation');
+INSERT INTO most_famous_movies (actor_id, movie_title, IMDB_rating, year_of_release, genre) VALUES ('7', 'The Pale Blue Eye', '6.6', '2022', 'horror');
+INSERT INTO most_famous_movies (actor_id, movie_title, IMDB_rating, year_of_release, genre) VALUES ('8', 'The Matrix', '8.7', '1999', 'action');
+
+CREATE table friends (
+    id INTEGER PRIMARY KEY,
+    friend1_id INTEGER,
+    friend2_id INTEGER);
+
+INSERT INTO friends (friend1_id, friend2_id)
+    VALUES (2, 6);
+INSERT INTO friends (friend1_id, friend2_id)
+    VALUES (4, 6);
+
+CREATE table relationship_history (
+    id INTEGER PRIMARY KEY,
+    partner1_id INTEGER,
+    partner2_id INTEGER);
+    
+INSERT INTO relationship_history (partner1_id, partner2_id)
+    VALUES (3, 4);
+    
+/* What movies have each actor been in? */
+SELECT movie_stars.first_name, movie_stars.last_name, most_recent_movies.movie_title AS most_recent_movie, most_famous_movies.movie_title AS most_famous_movie FROM movie_stars
+JOIN most_recent_movies
+ON movie_stars.actor_id = most_recent_movies.actor_id
+JOIN most_famous_movies
+ON movie_stars.actor_id = most_famous_movies.actor_id;
+
+/* What is the average age of these actors? */
+SELECT ROUND(AVG(movie_stars.age)) AS average_actor_age FROM movie_stars;
+
+/* Who is younger or older than the average age? */
+SELECT movie_stars.first_name, movie_stars.last_name, movie_stars.age,
+CASE
+WHEN movie_stars.age > '52' THEN 'older'
+WHEN movie_stars.age < '52' THEN 'younger'
+ELSE 'average'
+END AS 'age range'
+FROM movie_stars;
+
+/* Do American actors have more highly rated famous movies? */
+SELECT movie_stars.birth_place, ROUND(AVG(most_famous_movies.IMDB_rating)) as average_imdb_rating
+FROM movie_stars
+JOIN most_famous_movies
+ON movie_stars.actor_id = most_famous_movies.actor_id
+GROUP BY movie_stars.birth_place
+ORDER BY average_imdb_rating DESC;
+
+/* What is the average year of release for the actors' most famous movie? */
+SELECT ROUND(AVG(most_famous_movies.year_of_release)) as average_year_of_release_for_most_famous_movies
+FROM most_famous_movies;
+
+/* What is the order of least to most highly rated recent movies? */
+SELECT movie_stars.most_recent_movie, most_recent_movies.IMDB_rating
+FROM most_recent_movies
+JOIN movie_stars
+ON movie_stars.id = most_recent_movies.id
+ORDER BY most_recent_movies.IMDB_rating ASC;
+
+/* Which actors are friends? */
+SELECT a.first_name as friend_1, b.first_name as friend_2 FROM friends
+JOIN movie_stars a
+ON friends.friend1_id = a.id
+JOIN movie_stars b
+ON friends.friend2_id = b.id;
+
+/* Which actors have been together? */
+SELECT a.first_name as partner_1, b.first_name as partner_2
+FROM relationship_history
+JOIN movie_stars a
+ON relationship_history.partner1_id = a.id
+JOIN movie_stars b
+ON relationship_history.partner2_id = b.id;
+
+/* How many recent films are in each genre? */
+SELECT COUNT(most_recent_movies.movie_title) AS number_of_films, most_recent_movies.genre AS genre
+FROM most_recent_movies
+GROUP BY most_recent_movies.genre;
