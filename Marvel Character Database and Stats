@@ -1,4 +1,4 @@
---In this SQL, I'm querying a database about Marvel characters using basic SQL commands
+--For this project, I queried a database about Marvel characters using basic SQL commands
 
 CREATE TABLE marvels (ID INTEGER PRIMARY KEY,
     name TEXT,
