@@ -1,4 +1,4 @@
-/* Create table about movie stars and their movies */
+--For this project I created a SQL about movie stars and their movies
 /* All data about actors came from IMDB and Letterboxd */
 /* Most famous movie is top letterboxd result on profile */
 
